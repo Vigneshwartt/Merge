@@ -18,7 +18,8 @@ func SyncAccount() {
 	// data := map[string]string{
 	// 	"X-Account-Token": APItoken,
 	// }
-	url := fmt.Sprintf("https://app.merge.dev/linked-accounts/account/sync/%s", AccountId)
+	// url := fmt.Sprintf("https://app.merge.dev/linked-accounts/account/sync/%s", AccountId)
+	url := fmt.Sprintf("https://api.merge.dev/api/integrations/webhook-listener/%s", AccountId)
 	fmt.Println("url", url)
 
 	payload := map[string]interface{}{
@@ -60,4 +61,5 @@ func SyncAccount() {
 	}
 
 	fmt.Println("Response:", string(body))
+	// return
 }

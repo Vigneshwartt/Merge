@@ -88,18 +88,16 @@ func (hand *MergeHandler) PostClientData(c *gin.Context) {
 
 	for _, val := range response.Results {
 		dealDetail := map[string]interface{}{
-			"id":                 val.ID,
-			"remote_id":          val.RemoteID,
-			"created_at":         val.CreatedAt,
-			"remote_was_deleted": val.RemoteWasDeleted,
-			"remote_created_at":  val.RemoteCreatedAt,
-			"closedate":          val.CloseDate,
-			"last_activity_at":   val.CloseDate,
-			"status":             val.Status,
-			"amount":             val.Amount,
-			"description":        val.Description,
-			"name":               val.Name,
-			"modified_at":        val.ModifiedAt,
+			"id":                val.ID,
+			"remote_id":         val.RemoteID,
+			"created_at":        val.CreatedAt,
+			"remote_created_at": val.RemoteCreatedAt,
+			"closedate":         val.CloseDate,
+			"last_activity_at":  val.CloseDate,
+			"status":            val.Status,
+			"amount":            val.Amount,
+			"name":              val.Name,
+			"modified_at":       val.ModifiedAt,
 		}
 		dealDetails = append(dealDetails, dealDetail)
 	}
