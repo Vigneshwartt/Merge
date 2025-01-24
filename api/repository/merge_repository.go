@@ -19,7 +19,7 @@ var (
 
 type IRepoInterface interface {
 	GetClientData(url string) (*models.ApiResponse, error)
-	PostClientData(url string, datas []map[string]interface{}) (*models.DealsPayload, error)
+	PostClientData(url string, datas []map[string]interface{}) (*models.ApiResponse, error)
 }
 
 type repo struct {
@@ -90,16 +90,16 @@ func TransformDataFormat(input []map[string]interface{}) []models.HubSpotDeal {
 	return deals
 }
 
-func (client *repo) PostClientData(url string, data []map[string]interface{}) (*models.DealsPayload, error) {
-	var response models.DealsPayload
+func (client *repo) PostClientData(url string, data []map[string]interface{}) (*models.ApiResponse, error) {
+	var response models.ApiResponse
 
 	fmt.Println("Processing data", data)
-	// transformedData := TransformDataFormat(data)
+	transformedData := TransformDataFormat(data)
 
 	fmt.Println("")
 	// fmt.Println("Transfomeddata", transformedData)
 
-	value, err := json.Marshal(data)
+	value, err := json.Marshal(transformedData)
 	if err != nil {
 		fmt.Println("Error occurred while marshalling data:", err)
 		return nil, err
@@ -129,9 +129,6 @@ func (client *repo) PostClientData(url string, data []map[string]interface{}) (*
 	fmt.Println("Response", resp)
 	fmt.Println("")
 
-	// if http.StatusBadRequest == resp.StatusCode {
-	// 	return nil, fmt.Errorf("faced a issue in request,check it")
-	// }
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error occurred while reading response:", err)
